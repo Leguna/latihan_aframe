@@ -2,40 +2,51 @@
 
 <head>
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
-        AFRAME.registerComponent('cursor-listener', {
+        AFRAME.registerComponent('marker', {
             init: function () {
                 var lastIndex = -1;
-                var sky = document.getElementById("sky");
-                var IMAGES = ['images/city.jpg', 'images/land.jpg', 'images/street.jpg'];
+                const sky = document.querySelector('a-sky');
+
+                var IMAGES = ['#sky0', '#sky1', '#sky2'];
                 this.el.addEventListener('click', function (evt) {
                     lastIndex = (lastIndex + 1) % IMAGES.length;
-                    sky.src = IMAGES[lastIndex];
+                    // sky.src = IMAGES[lastIndex];
+                    sky.setAttribute('src', IMAGES[lastIndex]);
+                    // window.open("https://www.github.com/Leguna");
                     console.log('I was clicked at: ', evt.detail.intersection.point);
                 });
+
             }
         });
+
     </script>
 </head>
 
 <body>
-    <a-scene>
+    <a-scene cursor="rayOrigin: mouse">
         <a-assets>
             <img id="my-image" src="icon/avatar.jpg">
-            <img id="lainnya" src="images/city.jpg">
             <audio id="click-sound" crossorigin="anonymous"
-                src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+                src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg">
+            </audio>
+
+            <!-- Ganti sky -->
+            <img id="sky0" src="images/el.jpg">
+            <img id="sky1" src="images/city.jpg">
+            <img id="sky2" src="images/land.jpg">
         </a-assets>
 
 
 
 
         <!-- Image -->
-        <a-image position="0 0 -10" src="#my-image"
-            event-set__enter="_event: click; _target: #bg; src: images/city.jpg"></a-image>
+        <!-- <a-image position="0 0 -10" src="#my-image"
+            event-set__enter="_event: click; _target: #bg; src: images/city.jpg"></a-image> -->
+        <a-image position="0 0 -10" src="#my-image" marker></a-image>
+
         <!-- Text -->
-        <a-entity position="0 2.7 -10" rotation="0 0 0" text="value: Tekan Di sini; width:10;"></a-entity>
+        <!-- <a-entity position="0 2.7 -10" rotation="0 0 0" text="value: Tekan Di sini; width:10;"></a-entity> -->
 
         <a-sky id="bg" src="images/el.jpg" rotation="0 115 0"></a-sky>
 
@@ -45,8 +56,8 @@
         <a-entity camera look-controls wasd-controls>
             <a-cursor color="lime"></a-cursor>
         </a-entity>
-        <a-entity laser-controls="hand: left"></a-entity>
-        <a-entity laser-controls="hand: right"></a-entity>
+        <!-- <a-entity laser-controls="hand: left"></a-entity>
+        <a-entity laser-controls="hand: right"></a-entity> -->
 
         <!-- <a-entity camera look-controls></a-entity> -->
 
