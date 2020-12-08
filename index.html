@@ -2,6 +2,7 @@
 
 <head>
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
     <script>
         AFRAME.registerComponent('marker', {
             init: function () {
@@ -17,7 +18,6 @@
                 });
             }
         });
-
     </script>
 </head>
 
@@ -41,29 +41,38 @@
         <!-- Image -->
         <!-- <a-image position="0 0 -10" src="#my-image"
             event-set__enter="_event: click; _target: #bg; src: images/city.jpg"></a-image> -->
-        <a-image position="0 0 -10" src="#my-image" marker;
+        <a-image position="0 0 -10" src="#my-image" marker sound="src: #click-sound;"
             animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
             animation__mouseenter="property: components.material.material.color; type: color; to: grey; startEvents: mouseenter; dur: 500"
             animation__mouseleave="property: components.material.material.color; type: color; to: white; startEvents: mouseleave; dur: 500">
         </a-image>
-        <a-image position="3 0 -10" src="#my-image" marker;
-            animation__mouseenter="property: components.material.material.color; type: color; to: grey; startEvents: mouseenter; dur: 500"
+
+
+        <a-videosphere></a-videosphere>
+
+
+        <a-image position="3 0 -10" src="#my-image" marker sound="src: #click-sound;"
+            animation__mouseenter=" property: components.material.material.color; type: color; to: grey; startEvents:mouseenter; dur: 500"
             animation__mouseleave="property: components.material.material.color; type: color; to: white; startEvents: mouseleave; dur: 500">
         </a-image>
         <!-- Text -->
-        <!-- <a-entity position="0 2.7 -10" rotation="0 0 0" text="value: Tekan Di sini; width:10;"></a-entity> -->
 
         <a-sky id="bg" src="images/el.jpg" rotation="0 115 0"></a-sky>
 
 
 
         <!-- Camera and Control -->
-        <a-entity camera look-controls wasd-controls>
-            <!-- <a-cursor color="lime"></a-cursor> -->
-        </a-entity>
-        <!-- <a-entity laser-controls="hand: left"></a-entity>
-        <a-entity laser-controls="hand: right"></a-entity> -->
-
+        <!-- <a-entity camera look-controls wasd-controls>
+            <a-cursor color="lime"></a-cursor>
+        </a-entity> -->
+        <!-- Camera + Cursor. -->
+        <a-camera>
+            <a-cursor id="cursor" color="lime"
+                animation__click="property: scale; from: 0.1 0.1 0.1; to: 1 1 1; easing: easeInCubic; dur: 150; startEvents: click"
+                animation__clickreset="property: scale; to: 1 1 1; dur: 1; startEvents: animationcomplete__click"
+                animation__fusing="property: scale; from: 1 1 1; to: 0.1 0.1 0.1; easing: easeInCubic; dur: 150; startEvents: fusing">
+            </a-cursor>
+        </a-camera>
         <!-- <a-entity camera look-controls></a-entity> -->
 
     </a-scene>
