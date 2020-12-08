@@ -11,12 +11,10 @@
                 var IMAGES = ['#sky0', '#sky1', '#sky2'];
                 this.el.addEventListener('click', function (evt) {
                     lastIndex = (lastIndex + 1) % IMAGES.length;
-                    // sky.src = IMAGES[lastIndex];
                     sky.setAttribute('src', IMAGES[lastIndex]);
                     // window.open("https://www.github.com/Leguna");
                     console.log('I was clicked at: ', evt.detail.intersection.point);
                 });
-
             }
         });
 
@@ -43,8 +41,15 @@
         <!-- Image -->
         <!-- <a-image position="0 0 -10" src="#my-image"
             event-set__enter="_event: click; _target: #bg; src: images/city.jpg"></a-image> -->
-        <a-image position="0 0 -10" src="#my-image" marker></a-image>
-
+        <a-image position="0 0 -10" src="#my-image" marker;
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
+            animation__mouseenter="property: components.material.material.color; type: color; to: grey; startEvents: mouseenter; dur: 500"
+            animation__mouseleave="property: components.material.material.color; type: color; to: white; startEvents: mouseleave; dur: 500">
+        </a-image>
+        <a-image position="3 0 -10" src="#my-image" marker;
+            animation__mouseenter="property: components.material.material.color; type: color; to: grey; startEvents: mouseenter; dur: 500"
+            animation__mouseleave="property: components.material.material.color; type: color; to: white; startEvents: mouseleave; dur: 500">
+        </a-image>
         <!-- Text -->
         <!-- <a-entity position="0 2.7 -10" rotation="0 0 0" text="value: Tekan Di sini; width:10;"></a-entity> -->
 
@@ -54,7 +59,7 @@
 
         <!-- Camera and Control -->
         <a-entity camera look-controls wasd-controls>
-            <a-cursor color="lime"></a-cursor>
+            <!-- <a-cursor color="lime"></a-cursor> -->
         </a-entity>
         <!-- <a-entity laser-controls="hand: left"></a-entity>
         <a-entity laser-controls="hand: right"></a-entity> -->
