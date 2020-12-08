@@ -2,6 +2,21 @@
 
 <head>
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script>
+        AFRAME.registerComponent('cursor-listener', {
+            init: function () {
+                var lastIndex = -1;
+                var sky = document.getElementById("sky");
+                var IMAGES = ['images/city.jpg', 'images/land.jpg', 'images/street.jpg'];
+                this.el.addEventListener('click', function (evt) {
+                    lastIndex = (lastIndex + 1) % IMAGES.length;
+                    sky.src = IMAGES[lastIndex];
+                    console.log('I was clicked at: ', evt.detail.intersection.point);
+                });
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -14,18 +29,25 @@
         </a-assets>
 
 
-        <!-- Link -->
-        <a-link position="0 0 -10" href="https://github.com/Leguna" title="Gabut" image="#lainnya"></a-link>
+
+
         <!-- Image -->
-        <a-image position="0 2.7 -10" src="#my-image"></a-image>
+        <a-image position="0 0 -10" src="#my-image"
+            event-set__enter="_event: click; _target: #bg; src: images/city.jpg"></a-image>
         <!-- Text -->
         <a-entity position="0 2.7 -10" rotation="0 0 0" text="value: Tekan Di sini; width:10;"></a-entity>
 
-        <a-sky src="images/el.jpg" rotation="0 115 0"></a-sky>
-        <!-- Camera -->
+        <a-sky id="bg" src="images/el.jpg" rotation="0 115 0"></a-sky>
+
+
+
+        <!-- Camera and Control -->
         <a-entity camera look-controls wasd-controls>
-            <!-- <a-cursor></a-cursor> -->
+            <a-cursor color="lime"></a-cursor>
         </a-entity>
+        <a-entity laser-controls="hand: left"></a-entity>
+        <a-entity laser-controls="hand: right"></a-entity>
+
         <!-- <a-entity camera look-controls></a-entity> -->
 
     </a-scene>
