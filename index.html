@@ -9,11 +9,13 @@
                 var lastIndex = -1;
                 const sky = document.querySelector('a-sky');
 
-                var IMAGES = ['#sky0', '#sky1', '#sky2'];
+                // Daftar Panoramic
+                // var IMAGES = ['#sky0', '#sky1', '#sky2'];
+                var IMAGES = ['#pano0', '#pano1', '#pano2', '#pano3', '#pano4', '#pano5', '#pano6', '#pano7'];
+
                 this.el.addEventListener('click', function (evt) {
                     lastIndex = (lastIndex + 1) % IMAGES.length;
                     sky.setAttribute('src', IMAGES[lastIndex]);
-                    // window.open("https://www.github.com/Leguna");
                     console.log('I was clicked at: ', evt.detail.intersection.point);
                 });
             }
@@ -33,6 +35,15 @@
             <img id="sky0" src="images/el.jpg">
             <img id="sky1" src="images/city.jpg">
             <img id="sky2" src="images/land.jpg">
+
+            <img id="pano0" src="images/nuskin/06_Panoramic - 0000.jpg">
+            <img id="pano1" src="images/nuskin/06_Panoramic - 0001.jpg">
+            <img id="pano2" src="images/nuskin/06_Panoramic - 0002.jpg">
+            <img id="pano3" src="images/nuskin/06_Panoramic - 0003.jpg">
+            <img id="pano4" src="images/nuskin/06_Panoramic - 0004.jpg">
+            <img id="pano5" src="images/nuskin/06_Panoramic - 0005.jpg">
+            <img id="pano6" src="images/nuskin/06_Panoramic - 0006.jpg">
+            <img id="pano7" src="images/nuskin/06_Panoramic - 0007.jpg">
         </a-assets>
 
 
@@ -47,17 +58,13 @@
             animation__mouseleave="property: components.material.material.color; type: color; to: white; startEvents: mouseleave; dur: 500">
         </a-image>
 
-
-        <a-videosphere></a-videosphere>
-
-
         <a-image position="3 0 -10" src="#my-image" marker sound="src: #click-sound;"
             animation__mouseenter=" property: components.material.material.color; type: color; to: grey; startEvents:mouseenter; dur: 500"
             animation__mouseleave="property: components.material.material.color; type: color; to: white; startEvents: mouseleave; dur: 500">
         </a-image>
         <!-- Text -->
 
-        <a-sky id="bg" src="images/el.jpg" rotation="0 115 0"></a-sky>
+        <a-sky id="bg" src="images/nuskin/06_Panoramic - 0000.jpg" rotation="0 115 0"></a-sky>
 
 
 
